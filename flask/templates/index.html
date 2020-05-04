@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>智读影像</title>
+
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.bootcdn.net/ajax/libs/intro.js/2.9.3/introjs.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/4.4/examples/carousel/">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="apple-touch-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/apple-touch-icon.png" sizes="180x180">
+    <link rel="manifest" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/manifest.json">
+    <link rel="mask-icon" href="https://getbootstrap.com/docs/4.4/assets/img/favicons/safari-pinned-tab.svg" color="#563d7c">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
+    <link rel="icon" href="../static/logo.jpg">
+
+    <!-- <meta name="msapplication-config" content="/docs/4.4/assets/img/favicons/browserconfig.xml"> -->
+    <meta name="theme-color" content="#563d7c">
+
+
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+    </style>
+    <link href="https://getbootstrap.com/docs/4.4/examples/carousel/carousel.css" rel="stylesheet">
+  </head>
+  <body>
+      <script src="https://cdn.bootcdn.net/ajax/libs/intro.js/2.9.3/intro.js"></script>
+      <script type="text/javascript">
+      function start() {
+          introJs().start();
+      }
+        setTimeout(start ,4000);
+    </script>
+
+    <header>
+      <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+        <a class="navbar-brand" href="./">智读影像</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="./" data-step="3" data-intro="返回首页">首页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="./login" data-step="4" data-intro="登录进行阅片">登录 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="" data-step="5" data-intro="点击下载作业报告">报告下载<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="https://github.com/davidlinhl/hci" data-step="6" data-intro="点击访问项目源码">原型代码 <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+          <form class="form-inline mt-2 mt-md-0">
+            <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+          </form>
+        </div>
+      </nav>
+  </header>
+
+  <main role="main">
+
+  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+    </ol>
+
+    <div class="carousel-inner" data-step="1" data-intro="创新点简介">
+      <div class="carousel-item active">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption text-left">
+            <h1>语音识别内容输入.</h1>
+            <p>利用语音识别技术进行阅片报告文本输入，使用语音指令自动插入模板和数据</p>
+            <p><a class="btn btn-lg btn-primary" href="./login" role="button">登录</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>计算机视觉影像理解.</h1>
+            <p>利用计算机视觉方法深入理解影像内容，提供自动数据抽取，位置智能标注和诊断提示</p>
+            <p><a class="btn btn-lg btn-primary" href="./login" role="button">登录</a></p>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-item">
+        <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img"><rect width="100%" height="100%" fill="#777"></rect></svg>
+        <div class="container">
+          <div class="carousel-caption text-right">
+            <h1>自然语言处理内容编辑.</h1>
+            <p>使用自然语言处理技术识别语音指令中的用户意图，通过自然语言处理分析报告内容，和计算机视觉得出的阅片结果进行比对，提供自动补全和智能纠错</p>
+            <p><a class="btn btn-lg btn-primary" href="./login" role="button">登录</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="container marketing">
+
+    <!-- Three columns of text below the carousel -->
+    <div class="row" data-step="2" data-intro="创新点详解">
+      <div class="col-lg-4">
+        <i class="fa fa-microphone" style="font-size:140px"></i>
+        <h2>语音识别</h2>
+        <p>针对阅片场景关键词进行专门训练，准确率极高。全双共语音对话，一套扫描，一次唤醒。提升两倍以上输入速度，阅片过程中输入不打断医生思路。</p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <i class="fa fa-eye" style="font-size:140px"></i>
+        <h2>计算机视觉</h2>
+        <p>专业Copilot，自动完成多种脏器基本指标，多种常见疾病识别。结合NLP，自动补全报告内容。打数据训练，筛查疑难杂症，防止误诊漏诊。</p>
+        <!-- <p><a class="btn btn-secondary" href="https://getbootstrap.com/docs/4.4/examples/carousel/#" role="button">View details »</a></p> -->
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <i class="fa fa-clipboard" style="font-size:140px"></i>
+        <h2>自然语言处理</h2>
+        <p>准确理解报告内容，自动测量关键数据进行补全。全双工对话，准确识别用户意图。报告内容分析，结合CV算法自动进行内容校验。</p>
+        <!-- <p><a class="btn btn-secondary" href="https://getbootstrap.com/docs/4.4/examples/carousel/#" role="button">View details »</a></p> -->
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+
+
+  <!-- FOOTER -->
+  <footer class="container" style="position:fixed; bottom:50px; ">
+    <p>© 2017-2020 David Lin · <a href="https://getbootstrap.com/docs/4.4/examples/carousel/#">Privacy</a> · <a href="https://getbootstrap.com/docs/4.4/examples/carousel/#">Terms</a></p>
+  </footer>
+</main>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="/docs/4.4/assets/js/vendor/jquery.slim.min.js"><\/script>')</script>
+<script src="https://getbootstrap.com/docs/4.4/dist/js/bootstrap.bundle.min.js" integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm" crossorigin="anonymous"></script>
+
+</body></html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>登录</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/intro.js/2.9.3/introjs.css" rel="stylesheet">
+  <link rel="icon" href="../static/logo.jpg">
+</head>
+<body>
+
+
+<div class="container-fluid">
+    <div class="jumbotron" align="center"><h1>多模态阅片系统</h1></div>
+
+    <div class="row" align="center">
+
+        <div class="col"></div>
+
+        <div class="col" align="center">
+            {% if pswd %}
+                <form action="login" method="post" data-step="2" data-intro="测试阶段只要输入任何用户名密码都可以登录">
+                    <img class="rounded" src="../static/logo.jpg" width="72px" style="margin:100px 0px 50px 0px">
+                    <h1 class="h3 mb-3 font-weight-normal">输入登录信息</h1>
+                    <label for="inputEmail" class="sr-only">用户名</label>
+                    <input type="username" name="username" id="inputEmail" class="form-control" placeholder="用户名" required="" autofocus="">
+                    <label for="inputPassword" class="sr-only">密码</label>
+                    <input type="password" name='password' id="inputPassword" class="form-control" placeholder="密码" required="">
+                    <div class="checkbox mb-3">
+                      <label>
+                        <input type="checkbox" value="remember-me"> 保持登录状态
+                      </label>
+                    </div>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+                    <p class="mt-5 mb-3 text-muted">© 2017-2020</p>
+                </form>
+            {% else %}
+              <h1>刷脸登录</h1>
+              <script type="text/javascript">
+              function jump(){
+                  window.location.href = "./patient_list";
+              }
+
+              setTimeout(jump, 5000);
+
+              </script>
+              <video id="v" style="width: 640px;height: 480px;" onshow="javascript:setTimeout(jump, 3000);;"></video>
+              <script>
+                  !(function () {
+                      const constraints = {
+                          video: true,
+                          audio: false
+                      };
+                      let videoPlaying = false;
+                      let v = document.getElementById('v');
+                      let promise = navigator.mediaDevices.getUserMedia(constraints);
+                      promise.then(stream => {
+                          // 旧的浏览器可能没有srcObject
+                          if ("srcObject" in v) {
+                              v.srcObject = stream;
+                          } else {
+                              // 防止再新的浏览器里使用它，应为它已经不再支持了
+                              v.src = window.URL.createObjectURL(stream);
+                          }
+                          v.onloadedmetadata = function (e) {
+                              v.play();
+                              videoPlaying = true;
+                          };
+                      }).catch(err => {
+                          console.error(err.name + ": " + err.message);
+                      })
+                  })();
+              </script>
+            {% endif %}
+
+
+
+
+            <ul class="pagination" data-step="1" data-intro="系统可以使用帐号密码登录或刷脸登录">
+              <li class="page-item"><a class="page-link" href="./login?type=pswd">帐号密码登录</a></li>
+              <li class="page-item" data-step="3" data-intro="点击刷脸登录，5秒后自动跳转"><a class="page-link" href="./login?type=face">刷脸登录</a></li>
+            </ul>
+        </div>
+
+
+
+        <div class="col"></div>
+    </div>
+</div>
+
+
+
+</div>
+
+<script src="https://cdn.bootcdn.net/ajax/libs/intro.js/2.9.3/intro.js"></script>
+<script type="text/javascript">
+function start() {
+    introJs().start();
+}
+  setTimeout(start ,4000);
+</script>
+
+</body>
+</html>

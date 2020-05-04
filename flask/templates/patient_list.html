@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>影像列表</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/intro.js/2.9.3/introjs.css" rel="stylesheet">
+  <link rel="icon" href="../static/logo.jpg">
+</head>
+<body>
+
+<div class="container" align="center">
+    <div class="jumbotron" align="center"><h1>待诊患者列表</h1></div>
+
+    <table class="table table-hover" data-step="1" data-intro="患者按照优先级排序">
+      <thead>
+        <tr>
+          <th>姓名</th>
+          <th>年龄</th>
+          <th>性别</th>
+          <th>优先级</th>
+          <th></th>
+
+        </tr>
+      </thead>
+      <tbody>
+          {%for patient in patients%}
+        <tr>
+          <td>{{patient.name}}</td>
+          <td>{{patient.age}}</td>
+          <td>{{patient.gender}}</td>
+          <td>{{patient.priority}}</td>
+          <td><a href="./report?file={{patient.filename}}" class="btn btn-primary" data-step="2" data-intro="点击进行查阅">查阅</button></td>
+        </tr>
+        {%endfor%}
+      </tbody>
+    </table>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/intro.js/2.9.3/intro.js"></script>
+<script type="text/javascript">
+function start() {
+    introJs().start();
+}
+  setTimeout(start ,2000);
+</script>
+
+</body>
+</html>

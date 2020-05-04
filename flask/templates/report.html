@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>报告编辑界面</title>
+  <meta charset="utf-8">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://cdn.staticfile.org/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/popper.js/1.15.0/umd/popper.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.bootcdn.net/ajax/libs/intro.js/2.9.3/introjs.css" rel="stylesheet">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+  <!-- iOS meta tags -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="stylesheet" type="text/css" href="../static/papaya.css?build=1449" />
+  <script type="text/javascript" src="../static/papaya.js?build=1449"></script>
+  <link rel="icon" href="../static/logo.jpg">
+</head>
+<body>
+
+<div class="container" align="center">
+    <div class="jumbotron" align="center"><h1>读片界面</h1></div>
+
+    <!----------------------- 摄像头，模拟体感-->
+    <div align="right">
+        <video id="v" style="width: 120px;height: 100px;"data-step="4" data-intro="在使用过程中通过摄像头捕捉用户姿态，如果系统中目前propose如果向左或向右摆头可以切换固定的窗宽窗位设定"></video>
+    </div>
+    <script>
+        !(function () {
+            const constraints = {
+                video: true,
+                audio: false
+            };
+            let videoPlaying = false;
+            let v = document.getElementById('v');
+            let promise = navigator.mediaDevices.getUserMedia(constraints);
+            promise.then(stream => {
+                // 旧的浏览器可能没有srcObject
+                if ("srcObject" in v) {
+                    v.srcObject = stream;
+                } else {
+                    // 防止再新的浏览器里使用它，应为它已经不再支持了
+                    v.src = window.URL.createObjectURL(stream);
+                }
+                v.onloadedmetadata = function (e) {
+                    v.play();
+                    videoPlaying = true;
+                };
+            }).catch(err => {
+                console.error(err.name + ": " + err.message);
+            })
+        })();
+    </script>
+
+
+    <!---------------------- payapa -->
+
+    <script type="text/javascript">
+      var params = [];
+      params["worldSpace"] = true;
+      params["images"] = ["../static/scan/{{file_name}}"];
+      // params["images"] = ["../static/{{file_name}}"];
+      // params["surfaces"] = ["data/mySurface.surf.gii"];
+      // params["myOverlayImage.nii.gz"] = {"min": 4, "max": 10};
+    </script>
+    <div class="papaya" data-params="params" data-step="1" data-intro="影像展示区域，实际使用过程中结合PCAS自动加载患者影像，
+    不需要用户操作<br> ！！！因为这个intro和影像展示都是js，一起跑容易崩，在看到影像数据之前不要点下一步！！！"></div>
+
+    <!----------------------  内容编辑  -->
+
+    <br><br>
+    <div align="center">
+        <h1>报告编辑区域</h1>
+    </div>
+    <link href="https://cdn.quilljs.com/1.0.0/quill.snow.css" rel="stylesheet">
+
+    <!-- Create the toolbar container -->
+    <div id="toolbar">
+      <!-- <button class="ql-bold">Bold</button>
+      <button class="ql-italic">Italic</button> -->
+    </div>
+
+    <!-- Create the editor container -->
+    <div id="editor" data-step="2" data-intro="报告编辑区域，系统中主要使用语音输入和语音指令进行编辑">
+      <p> </p>
+    </div>
+
+    <!-- Include the Quill library -->
+    <script src="https://cdn.quilljs.com/1.0.0/quill.js"></script>
+
+    <!-- Initialize Quill editor -->
+    <script>
+        var toolbarOptions = [
+          ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+          ['blockquote', 'code-block'],
+
+          [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+          [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+          [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+          [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+          [{ 'direction': 'rtl' }],                         // text direction
+
+          [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+          [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+
+          [{ 'color': [] }, { 'background': [] }],          // dropdown with defaults from theme
+          [{ 'font': [] }],
+          [{ 'align': [] }],
+
+          ['clean']                                         // remove formatting button
+        ];
+        var quill = new Quill('#editor', {
+            modules: { toolbar: toolbarOptions},
+            placeholder: '在此处编辑报告',
+            theme: 'snow'
+        });
+    </script>
+
+    <!------------- 假的语音识别 -->
+    <div style="position: absolute; bottom:50px; right:50px; text-align:right;" data-step="3" data-intro="实时的语音识别实现上很复杂，
+    百度语音识别api目前只支持录音之后音频文集那上传，之后返回识别结果，在app或者桌面开发中是支持实时识别的，结合NLP技术可以做到全双工。
+    <br>这里模拟了几个语音指令的效果">
+        <div id="cmds" class="collapse">
+            <table class="table table-hover">
+                <thead>
+                </thead>
+                <tr>
+                    <td onclick="javascript:addAuthor()">[指令]添加作者</td>
+                </tr>
+                <tr>
+                    <td onclick="javascript:addLiverSize()">[指令]添加肝脏体积</td>
+                </tr>
+                <tr>
+                    <td onclick="javascript:addLiverLesion()">[指令]添加肝脏病灶数量</td>
+                </tr>
+                <tr>
+                    <td onclick="javascript:addTime()">[指令]添加时间</td>
+                </tr>
+                <tr>
+                    <td data-toggle="modal" data-target="#reconstruct_modal">[指令]对某脏器进行3D重建</td>
+                </tr>
+
+            </table>
+        </div>
+        <button type="button" class="btn btn-primary" data-toggle="collapse" data-target="#cmds">语音指令</button>
+    </div>
+
+    <!------------ 模态框 ------->
+    <div class="modal fade" id="reconstruct_modal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <!-- 模态框主体 -->
+        <div class="modal-body">
+            进行3D重建<br>
+            <img src="https://ss1.bdstatic.com/70cFvXSh_Q1YnxGkpoWK1HF6hhy/it/u=1773009329,1776639764&fm=26&gp=0.jpg" />
+            <br>
+            并类似这个pop出来展示，可以进行3D拖动
+        </div>
+
+        <!-- 模态框底部 -->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+    <script type="text/javascript">
+        function getFullTime() {
+            let date = new Date(),//时间戳为10位需*1000，时间戳为13位的话不需乘1000
+                Y = date.getFullYear() + '',
+                M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1),
+                D = (date.getDate() < 10 ? '0'+(date.getDate()) : date.getDate()),
+                h = (date.getHours() < 10 ? '0'+(date.getHours()) : date.getHours()),
+                m = (date.getMinutes() < 10 ? '0'+(date.getMinutes()) : date.getMinutes()),
+                s = (date.getSeconds() < 10 ? '0'+(date.getSeconds()) : date.getSeconds());
+            return Y + '-' + M + '-' + D + ' ' + h + ':' + m + ':' + s
+        }
+
+
+        function addAuthor()
+        {
+            quill.insertText(quill.getLength() - 1, "诊断医师：hanlin\n", 'bold', true);
+        }
+        function addLiverSize()
+        {
+            quill.insertText(quill.getLength() - 1, "肝脏体积为2300ml \n", 'bold', true);
+        }
+        function addLiverLesion()
+        {
+            quill.insertText(quill.getLength() - 1, "肝脏共发现2个病灶，位置为(具体位置结合计算机视觉方法添加，并移动片子到该位置) \n", 'bold', true);
+        }
+        function addTime()
+        {
+            quill.insertText(quill.getLength() - 1, getFullTime() + '\n', 'bold', true);
+        }
+
+
+    </script>
+
+    <script src="https://cdn.bootcdn.net/ajax/libs/intro.js/2.9.3/intro.js"></script>
+    <script type="text/javascript">
+    function start() {
+        introJs().start();
+    }
+      setTimeout(start ,10000);
+    </script>
+
+</div>
+</body>
+</html>
