@@ -14,6 +14,7 @@ python router.py
 ```
 此时项目应该就已经起来了，打开浏览器访问 http://localhost:5000/ 应该就可以看到项目了。
 
-- TODO
+
+# TODO
 - [ ] 解决上服务器之后摄像头无法启用的问题
 - [ ] 完善读片页面js，解决introjs额payapa一起加载崩溃
